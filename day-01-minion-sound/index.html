@@ -156,10 +156,10 @@ var tap = true;
    });
    document.addEventListener('touchend',function(e) {
       if(tap) {
-        playSoundtouch();
+        playSoundtouch(e);
       }
    });
-window.addEventListener("click", playSoundClick());
+window.addEventListener("click", playSoundClick);
 // console.log(keys);
 // const clicks = document.querySelectorAll()
 </script>
