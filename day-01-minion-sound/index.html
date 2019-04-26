@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Day One: Minions Effects | JavaScript 30</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
 
 <body>
@@ -111,8 +109,6 @@ span{
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
 function playSound(event){
     const audio = document.querySelector(`audio[data-key = "${event.keyCode}"]`);
     const key = document.querySelector(`.key[data-key = "${event.keyCode}"]`);
@@ -135,7 +131,6 @@ function playSoundClick(event){
     audio.currentTime=0;//rewind to the start;
     audio.play();
     key.classList.add('playing');
-
 }
 
 const keys = document.querySelectorAll('.key');
@@ -144,7 +139,6 @@ window.addEventListener("keydown", playSound);
 window.addEventListener("click", playSoundClick);
 // console.log(keys);
 // const clicks = document.querySelectorAll()
-});
 </script>
 
 </html>
