@@ -136,9 +136,21 @@ function playSoundClick(event){
 const keys = document.querySelectorAll('.key');
 keys.forEach(key=>key.addEventListener('transitionend', removeTransition))
 window.addEventListener("keydown", playSound);
-window.addEventListener("click", playSoundClick);
+var tap = true;
+   document.addEventListener('touchstart',function(e) {
+      tap = true;
+   });
+   document.addEventListener('touchmove',function(e) {
+     tap = false;
+   });
+   document.addEventListener('touchend',function(e) {
+      if(tap) {
+        playSoundClick();
+      }
+   });
+window.addEventListener("click", playSoundClick());
 // console.log(keys);
 // const clicks = document.querySelectorAll()
 </script>
 
-</html>
+</html
