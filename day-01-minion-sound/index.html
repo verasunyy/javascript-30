@@ -136,8 +136,8 @@ function playSoundClick(event){
 function playSoundtouch(event){
     console.log(event);
     const touchKeyCode = event.target.parentNode.dataset.key;
-    const audio = document.querySelector(`audio[data-key = "${clickKeyCode}"]`);
-    const key = document.querySelector(`.key[data-key = "${clickKeyCode}"]`);
+    const audio = document.querySelector(`audio[data-key = "${touchKeyCode}"]`);
+    const key = document.querySelector(`.key[data-key = "${touchKeyCode}"]`);
     if(!audio)return;
     audio.currentTime=0;//rewind to the start;
     audio.play();
