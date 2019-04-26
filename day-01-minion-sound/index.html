@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Day One: Minions Effects | JavaScript 30</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">Bababa</span>
+        </div>
+        <div data-key="83" class="key">
+            <kbd>s</kbd>
+            <span class="sound">banana</span>
+        </div>
+        <div data-key="68" class="key">
+            <kbd>d</kbd>
+            <span class="sound">doo</span>
+        </div>
+        <div data-key="70" class="key">
+            <kbd>f</kbd>
+            <span class="sound">hello</span>
+        </div>
+        <div data-key="71" class="key">
+            <kbd>g</kbd>
+            <span class="sound">hmhm</span>
+        </div>
+        <div data-key="72" class="key">
+            <kbd>h</kbd>
+            <span class="sound">potato</span>
+        </div>
+        <div data-key="74" class="key">
+            <kbd>j</kbd>
+            <span class="sound">sleep</span>
+        </div>
+        <div data-key="75" class="key">
+            <kbd>k</kbd>
+            <span class="sound">water</span>
+        </div>
+        <div data-key="76" class="key">
+            <kbd>l</kbd>
+            <span class="sound">yulalo</span>
+        </div>
+    </div>
+
+    <audio data-key="65" src="minions-sounds/Bababa.mov"></audio>
+    <audio data-key="83" src="minions-sounds/Banana.mov"></audio>
+    <audio data-key="68" src="minions-sounds/Doo.mov"></audio>
+    <audio data-key="70" src="minions-sounds/Hello.mov"></audio>
+    <audio data-key="71" src="minions-sounds/Hmhm.mov"></audio>
+    <audio data-key="72" src="minions-sounds/Potato.mov"></audio>
+    <audio data-key="74" src="minions-sounds/Sleep.mov"></audio>
+    <audio data-key="75" src="minions-sounds/Water.mov"></audio>
+    <audio data-key="76" src="minions-sounds/YupLaLo.mov"></audio>
+</body>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url("image/background.jpg");
+    background-size: cover;
+    font-size: 16px;
+    display:flex;
+    justify-content: center;
+}
+kbd{
+    font-size: 3rem;
+    font-weight: 500;
+    color:yellow;
+    display:block;
+}
+span{
+    color:white;
+    font-size: 0.7rem;
+}
+.keys{
+    max-width: 1240px;
+    width: 100vw;
+    padding: 70px;
+    height:100vh;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.key{
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    border: 3px white solid;
+    border-radius: 5px;
+    width: 70px;
+    padding: 3px;
+    text-align: center;
+    transition:all 0.1s;
+}
+.playing{
+    transform:scale(1.1);
+    border-color:yellow;
+    box-shadow: 0 0 10px yellow;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+function playSound(event){
+    const audio = document.querySelector(`audio[data-key = "${event.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key = "${event.keyCode}"]`);
+    if(!audio)return;
+    audio.currentTime=0;//rewind to the start;
+    audio.play();
+    key.classList.add('playing');
+}
+
+function removeTransition(event){
+    if(event.propertyName !== 'transform')return;
+    this.classList.remove('playing');
+}
+
+function playSoundClick(event){
+    const clickKeyCode = event.target.parentNode.dataset.key;
+    const audio = document.querySelector(`audio[data-key = "${clickKeyCode}"]`);
+    const key = document.querySelector(`.key[data-key = "${clickKeyCode}"]`);
+    if(!audio)return;
+    audio.currentTime=0;//rewind to the start;
+    audio.play();
+    key.classList.add('playing');
+
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key=>key.addEventListener('transitionend', removeTransition))
+window.addEventListener("keydown", playSound);
+window.addEventListener("click", playSoundClick);
+// console.log(keys);
+// const clicks = document.querySelectorAll()
+});
+</script>
+
+</html>

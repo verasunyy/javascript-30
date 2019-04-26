@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Day Two: Clock | JavaScript 30</title>
+</head>
+
+<body>
+    <div class="background">
+
+        <div class="clock">
+            <div class="clock-face">
+                <div class="hands">
+                    <div class="hand sec-hand"></div>
+                    <div class="hand min-hand"></div>
+                    <div class="hand hour-hand"></div>
+                </div>
+
+                <div class="text">
+                    <div class="number twelve">XII</div>
+                    <div class="number three">III</div>
+                    <div class="number six">VI</div>
+                    <div class="number nine">IX</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            /* border:2px dashed lightgray; */
+        }
+
+        .background {
+            background-color: black;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin:0 auto;
+        }
+
+        .clock {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 0, 0.7);
+            border: 5px solid rgba(0, 0, 255, 0.7);
+            border-radius: 50%;
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        .clock-face {
+            position: relative;
+            height: 100%;
+            width: 100%;
+
+        }
+
+        .hands {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .hand {
+            position: absolute;
+            /* width:40%; */
+            top: 50%;
+            /* left:10% */
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all 0.05s;
+            transition-timing-function: cubic-bezier(0.29, 1.6, 0.61, 0.4);
+
+        }
+
+        .sec-hand {
+            width: 40%;
+            left: 10%;
+            height: 1px;
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+
+        .min-hand {
+            width: 35%;
+            left: 15%;
+            height: 1.5px;
+            background-color:rgba(255, 255, 255, 0.8);
+        }
+
+        .hour-hand {
+            width: 20%;
+            left: 30%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .text {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            bottom: 100%;
+            padding: 10px;
+        }
+
+        .number {
+            position: absolute;
+            text-align: center;
+            font-size: 1.8rem;
+            color: black;
+            transform: translate(-50%, -50%);
+            margin: auto;
+        }
+
+        .twelve {
+            left: 50%;
+            /* padding-top: 5px; */
+        }
+
+        .three {
+            top: 50%;
+            left: 100%;
+            padding-right: 15px;
+        }
+
+        .six {
+            top: 100%;
+            left: 50%;
+            padding-bottom: 15px;
+        }
+
+        .nine {
+            top: 50%;
+            /* padding-left: 15px; */
+        }
+    </style>
+
+    <script>
+        const secondHand = document.querySelector('.sec-hand');
+        const muniteHand = document.querySelector('.min-hand');
+        const hourHand = document.querySelector('.hour-hand');
+        function setDate(){
+            const now = new Date();
+            //seconds
+            const seconds = now.getSeconds ();
+            const secondsDegrees = (seconds/60)*360+90;
+            secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+            //minutes
+            const minutes = now.getMinutes();
+            const minutesDegrees = ((minutes +seconds/60)/60)*360+90;
+            muniteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+
+            const hours = now.getHours();
+            const hoursDegrees = ((hours+minutes/60)/12)*360+90;
+            hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+        }
+        setInterval(setDate, 1000);
+
+    </script>
+</body>
+
+</html>
